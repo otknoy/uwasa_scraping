@@ -6,10 +6,10 @@ require 'nokogiri'
 
 if __FILE__ == $0
   pagename = ' 高槻市'
-  # uri = URI.escape('http://wiki.chakuriki.net/index.php/' + pagename)
+  uri = URI.escape('http://wiki.chakuriki.net/index.php/' + pagename)
 
-  # doc = Nokogiri::HTML(open(uri))
-  doc = Nokogiri::HTML(open('takatsuki_city.html'))
+  doc = Nokogiri::HTML(open(uri))
+  # doc = Nokogiri::HTML(open('takatsuki_city.html'))
 
   content = doc.xpath('//div[@class="mw-content-ltr"]')
 
