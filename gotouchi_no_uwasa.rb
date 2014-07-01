@@ -46,13 +46,12 @@ end
 if __FILE__ == $0
   pagenames = ['大阪', '大阪市']
 
+  require 'json'
+
   pagenames.each do |p|
     uwasa_list = fetch_uwasa p
-    puts "pagename: #{p}"
-    uwasa_list.each do |u|
-      puts u['title']
-      puts u['descriptions'].size
+    open('data/' + p+'.json', 'w') do |f|
+      f.write(JSON.pretty_generate(uwasa_list))
     end
-    puts
   end
 end
