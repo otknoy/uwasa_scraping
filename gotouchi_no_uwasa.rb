@@ -44,13 +44,13 @@ def elementsToArray elements
 end
 
 if __FILE__ == $0
-  pagenames = ['大阪', '大阪市']
+  pagenames = ['大阪市の駅']
 
   require 'json'
 
   pagenames.each do |p|
     uwasa_list = fetch_uwasa p
-    open('data/' + p+'.json', 'w') do |f|
+    open('results/' + p+'.json', 'w') do |f|
       f.write(JSON.pretty_generate(uwasa_list))
     end
   end
