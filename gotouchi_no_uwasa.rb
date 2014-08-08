@@ -10,18 +10,18 @@ def fetch_uwasa pagename
   uri = URI.escape(BASE_URI + pagename)
   doc = Nokogiri::HTML(open(uri))
 
-  elements = extractUwasaElements doc
-  elements = removeNoOrderListHeading elements
-  elementsToArray(elements)
+  elements = extract_uwasa_elements doc
+  elements = remove_no_order_list_heading elements
+  elements_to_array(elements)
 end
 
-def extractUwasaElements doc
+def extract_uwasa_elements doc
   content = doc.xpath('//div[@class="mw-content-ltr"]')
   elements = content.xpath('*')
   elements.select {|e| e.path =~ /(h[1-6]|ol)(\[[0-9]+\])*$/}
 end
 
-def removeNoOrderListHeading elements
+def remove_no_order_list_heading elements
   ret = []
   elements.each_cons(2) do |e1, e2|
     pat_h = /h[1-6](\[[0-9]+\])*$/
@@ -31,7 +31,7 @@ def removeNoOrderListHeading elements
   ret
 end
 
-def elementsToArray elements
+def elements_to_array elements
   ret = []
   elements.each_slice(2) do |h, ol|
     title = h.xpath('span[@class="mw-headline"]').text
